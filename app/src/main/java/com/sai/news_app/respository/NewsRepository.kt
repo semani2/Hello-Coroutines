@@ -1,6 +1,5 @@
 package com.sai.news_app.respository
 
-import android.util.Log
 import com.sai.news_app.BuildConfig
 import com.sai.news_app.await
 import com.sai.news_app.db.NewsArticleDao
@@ -17,8 +16,8 @@ class NewsRepository(val api: NewsApiService, val db: NewsArticleDao): INewsRepo
         try {
             val news = api.getNews(BuildConfig.NEWS_API_KEY).await()
 
-            val resultList = mutableListOf<NewsArticle>()
             db.deleteAllArticles()
+
             for(article in news.articles) {
                 val newsArticle = NewsArticle(
                     id = 0,
@@ -30,10 +29,9 @@ class NewsRepository(val api: NewsApiService, val db: NewsArticleDao): INewsRepo
                     publishedAt = article.publishedAt
                 )
                 db.insertNewsArticle(newsArticle)
-                resultList.add(newsArticle)
             }
 
-            return resultList
+            return db.getNewsArticles()
         }
         catch (e: Exception) {
             throw e
@@ -42,7 +40,9 @@ class NewsRepository(val api: NewsApiService, val db: NewsArticleDao): INewsRepo
 
     override suspend fun getNewsArticle(id: Int): NewsArticle? {
         return try {
-            db.getNewsArticle(id)
+            db.getNewsArticles().first {
+                it.id == id
+            }
         } catch (e: Exception) {
             throw e
         }

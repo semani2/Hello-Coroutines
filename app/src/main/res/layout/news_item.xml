@@ -20,7 +20,6 @@
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
     android:textSize="14sp"
     android:textStyle="bold"
-    android:fontFamily="monospace"
     android:maxLines="1"
     android:ellipsize="end"/>
     <TextView
@@ -36,7 +35,8 @@
             tools:text="29 Mar, 2019"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/date_text_view"
+            android:id="@+id/source_text_view"
             app:layout_constraintBottom_toBottomOf="@+id/news_image_view" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp"/>
+            android:layout_marginEnd="8dp"
+            android:textStyle="italic" />
 </androidx.constraintlayout.widget.ConstraintLayout>

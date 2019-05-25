@@ -1,5 +1,6 @@
 package com.sai.news_app
 
+import androidx.recyclerview.widget.RecyclerView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,3 +29,11 @@ suspend fun <T> Call<T>.await(): T {
         })
     }
 }
+
+fun <T : RecyclerView.ViewHolder> T.listen(event: (position: Int, type: Int) -> Unit): T {
+    itemView.setOnClickListener {
+        event.invoke(adapterPosition, itemViewType)
+    }
+    return this
+}
+
