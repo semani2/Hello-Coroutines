@@ -40,9 +40,7 @@ class NewsRepository(val api: NewsApiService, val db: NewsArticleDao): INewsRepo
 
     override suspend fun getNewsArticle(id: Int): NewsArticle? {
         return try {
-            db.getNewsArticles().first {
-                it.id == id
-            }
+            db.getNewsArticle(id)[0]
         } catch (e: Exception) {
             throw e
         }

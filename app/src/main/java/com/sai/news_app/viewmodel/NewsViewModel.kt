@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 open class NewsViewModel : ViewModel() {
-    protected val _spinner = MutableLiveData<Boolean>()
+    private val _spinner = MutableLiveData<Boolean>()
 
     val spinner: LiveData<Boolean>
         get() = _spinner

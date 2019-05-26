@@ -17,6 +17,9 @@ interface NewsArticleDao {
     @Query("SELECT * FROM NewsArticle")
     suspend fun getNewsArticles(): List<NewsArticle>
 
+    @Query("SELECT * FROM NewsArticle where id == :id")
+    suspend fun getNewsArticle(id: Int): List<NewsArticle>
+
     @Query("DELETE FROM NewsArticle")
     suspend fun deleteAllArticles()
 }
